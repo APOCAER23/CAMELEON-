@@ -1,0 +1,43 @@
+{
+  "name": "@cameleon/desktop",
+  "version": "0.2.0",
+  "private": true,
+  "description": "CAMELEON Desktop — graphical control center for providers, models and agents.",
+  "type": "module",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:renderer": "vite build",
+    "build": "npm run build:main && npm run build:renderer",
+    "typecheck": "tsc -p tsconfig.main.json --noEmit && tsc -p tsconfig.renderer.json --noEmit",
+    "start": "npm run build && electron .",
+    "dev": "npm run build:main && concurrently -k -n vite,electron \"vite --port 5173 --strictPort\" \"wait-on tcp:5173 && electron . --dev\"",
+    "test": "tsx --test src/main/*.test.ts"
+  },
+  "dependencies": {
+    "@cameleon/cli": "0.2.0",
+    "@cameleon/kit": "0.2.0",
+    "@cameleon/shared": "0.2.0",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource/jetbrains-mono": "^5.1.0",
+    "@lydell/node-pty": "^1.2.0-beta.18",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "vite": "^5.4.11",
+    "wait-on": "^8.0.1"
+  }
+}

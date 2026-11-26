@@ -1,0 +1,13 @@
+{
+  "name": "@cameleon/shared",
+  "version": "0.2.0",
+  "description": "Zod schemas, API contract and typed HTTP client shared by the CAMELEON engine, CLI and desktop app.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": { "test": "tsx --test src/*.test.ts" },
+  "dependencies": { "zod": "^3.24.1" },
+  "license": "MIT"
+}

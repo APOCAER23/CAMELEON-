@@ -1,0 +1,37 @@
+{
+  "name": "@cameleon/engine",
+  "version": "0.2.0",
+  "description": "CAMELEON local engine: authenticated localhost API, provider registry, credential vault, SQLite metadata.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./daemon": "./dist/daemon.js"
+  },
+  "bin": {
+    "cameleon-engine": "./dist/daemon.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "tsx --test src/*.test.ts"
+  },
+  "dependencies": {
+    "@cameleon/kit": "0.2.0",
+    "@cameleon/shared": "0.2.0",
+    "@fastify/rate-limit": "^10.2.1",
+    "better-sqlite3": "^12.2.0",
+    "execa": "^9.5.2",
+    "fastify": "^5.2.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12"
+  },
+  "license": "MIT"
+}

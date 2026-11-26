@@ -1,0 +1,30 @@
+{
+  "name": "cameleon",
+  "private": true,
+  "version": "0.2.0",
+  "description": "CAMELEON \u2014 One CLI. Every Provider. Every Agent.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "tsc -b packages/kit packages/shared packages/engine packages/cli",
+    "build:desktop": "npm run build -w @cameleon/desktop",
+    "typecheck": "tsc -b packages/kit packages/shared packages/engine packages/cli",
+    "test": "npm test --workspaces --if-present",
+    "engine": "node packages/engine/dist/daemon.js",
+    "cameleon": "node packages/cli/dist/bin.js",
+    "dev:desktop": "npm run dev -w @cameleon/desktop",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo apps/desktop/dist apps/desktop/dist-electron",
+    "build:all": "npm run build && npm run build -w @cameleon/desktop"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  }
+}

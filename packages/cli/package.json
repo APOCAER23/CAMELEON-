@@ -1,0 +1,35 @@
+{
+  "name": "@cameleon/cli",
+  "version": "0.2.0",
+  "description": "CAMELEON command line: one CLI, every provider, every agent.",
+  "type": "module",
+  "bin": {
+    "cameleon": "./dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "tsx --test src/*.test.ts"
+  },
+  "dependencies": {
+    "@cameleon/engine": "0.2.0",
+    "@cameleon/kit": "0.2.0",
+    "@cameleon/shared": "0.2.0",
+    "@inquirer/prompts": "^7.2.0",
+    "chalk": "^5.4.1",
+    "commander": "^12.1.0",
+    "execa": "^9.5.2",
+    "ora": "^8.1.1"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./bin": "./dist/bin.js"
+  }
+}
