@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { getPaths, stopDaemon, tailLog } from '@cameleon/cli';
 import { findExecutable, redactString } from '@cameleon/kit';
 import { ensureEngine, forward } from './engine-bridge.js';
+import { resolveNodeBin } from './node-runtime.js';
 import { readSettings, SettingsPatch, writeSettings } from './settings.js';
 import { buildTerminalCommand, isSafeModelId, manualCommand, openTerminal } from './terminal.js';
 import {
@@ -70,7 +71,7 @@ const TerminalRequestSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('shell'), cwd: z.string().max(500).optional() }),
 ]);
 
-const nodeBin = () => findExecutable(['node']) ?? process.env['CAMELEON_NODE'] ?? 'node';
+const nodeBin = () => resolveNodeBin(process.resourcesPath, process.platform);
 const cliBin = () => fileURLToPath(import.meta.resolve('@cameleon/cli/bin'));
 function resolveCwd(cwd?: string): string {
   if (cwd && path.isAbsolute(cwd)) { try { if (fs.statSync(cwd).isDirectory()) return cwd; } catch { /* fall through */ } }

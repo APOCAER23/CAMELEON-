@@ -1,6 +1,8 @@
 node_modules
 dist
 dist-electron
+apps/desktop/runtime
+apps/desktop/release
 *.tsbuildinfo
 .env
 .env.*

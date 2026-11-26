@@ -1,12 +1,13 @@
 import { getPaths, runningEngine, startDaemon } from '@cameleon/cli';
 import type { RuntimeInfo } from '@cameleon/kit';
+import { resolveNodeBin } from './node-runtime.js';
 
 /**
  * Desktop → engine bridge. Runs in the main process only, so the bearer token stays out of the renderer.
  * The renderer may reach a strict allow-list of routes — never shutdown, never anything outside /v1.
  */
 
-const NODE_BIN = process.env['CAMELEON_NODE'] || 'node'; // Electron's own binary has a different native ABI than Node
+const NODE_BIN = resolveNodeBin(process.resourcesPath, process.platform);
 
 /**
  * Routes the UI may call. Deliberately ABSENT: /v1/engine/shutdown and /v1/launch/prepare (returns decrypted secrets)

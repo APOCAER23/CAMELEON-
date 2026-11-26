@@ -20,7 +20,9 @@
     "cameleon": "node packages/cli/dist/bin.js",
     "dev:desktop": "npm run dev -w @cameleon/desktop",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo apps/desktop/dist apps/desktop/dist-electron",
-    "build:all": "npm run build && npm run build -w @cameleon/desktop"
+    "build:all": "npm run build && npm run build -w @cameleon/desktop",
+    "stage:node-runtime": "node scripts/stage-node-runtime.mjs",
+    "package:desktop": "npm run build:all && npm run stage:node-runtime && npm run dist -w @cameleon/desktop"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

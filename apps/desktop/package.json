@@ -12,7 +12,8 @@
     "typecheck": "tsc -p tsconfig.main.json --noEmit && tsc -p tsconfig.renderer.json --noEmit",
     "start": "npm run build && electron .",
     "dev": "npm run build:main && concurrently -k -n vite,electron \"vite --port 5173 --strictPort\" \"wait-on tcp:5173 && electron . --dev\"",
-    "test": "tsx --test src/main/*.test.ts"
+    "test": "tsx --test src/main/*.test.ts",
+    "dist": "electron-builder --publish never"
   },
   "dependencies": {
     "@cameleon/cli": "0.2.0",
@@ -34,10 +35,52 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.0",
-    "electron": "^33.2.0",
+    "electron": "33.4.11",
+    "electron-builder": "^26.18.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
     "vite": "^5.4.11",
     "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.apocaer23.cameleon",
+    "productName": "CAMELEON",
+    "asar": false,
+    "npmRebuild": false,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "dist/renderer/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "runtime",
+        "to": "runtime"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Development"
+    }
   }
 }
