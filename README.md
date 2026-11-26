@@ -46,7 +46,7 @@ npm run package:desktop
 ```
 
 The app installer includes its own Node.js runtime; a separate Node.js installation is not required to run it.
-New public releases are built by GitHub Actions when a version tag (for example `v0.2.0`) is pushed.
+New public releases are built by GitHub Actions when a version tag (for example `v0.2.1`) is pushed.
 Installers are currently unsigned, so Windows or macOS may display a security warning during installation.
 
 Environment variables: `CAMELEON_HOME` (relocate all data), `CAMELEON_PORT` (fixed engine port),
