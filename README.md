@@ -38,6 +38,7 @@ npm run build -w @cameleon/desktop && npx electron apps/desktop   # production b
 ## Download the desktop app
 
 Installers for Windows, macOS and Linux are attached to [GitHub Releases](https://github.com/APOCAER23/CAMELEON-/releases).
+The download page is published at [apocaer23.github.io/CAMELEON-](https://apocaer23.github.io/CAMELEON-/).
 To build the installer for your current operating system locally, run:
 
 ```bash
@@ -46,8 +47,9 @@ npm run package:desktop
 ```
 
 The app installer includes its own Node.js runtime; a separate Node.js installation is not required to run it.
-New public releases are built by GitHub Actions when a version tag (for example `v0.2.1`) is pushed.
+New public releases are built by GitHub Actions when a version tag (for example `v0.2.2`) is pushed.
 Installers are currently unsigned, so Windows or macOS may display a security warning during installation.
+To enable the download page, set the repository's GitHub Pages source to **GitHub Actions** once under **Settings → Pages**.
 
 Environment variables: `CAMELEON_HOME` (relocate all data), `CAMELEON_PORT` (fixed engine port),
 `CAMELEON_VAULT=file` (force the encrypted-file vault), `CAMELEON_NODE` (advanced override for the Node binary used by the desktop app).
