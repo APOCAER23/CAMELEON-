@@ -143,10 +143,21 @@ function renderSelectedPlatform() {
   const platformName = platformNames[selectedPlatform];
   elements.selectedPlatform.textContent = platformName;
   elements.panel.setAttribute('aria-labelledby', `os-${selectedPlatform}`);
+  elements.downloadList.replaceChildren();
+
+  if (!currentRelease) {
+    elements.platformTitle.textContent = 'Loading release information';
+    const message = document.createElement('p');
+    message.className = 'empty-state';
+    message.textContent = 'Installer files will appear as soon as release data loads.';
+    elements.downloadList.append(message);
+    elements.downloadStatus.textContent = 'Loading available installers…';
+    return;
+  }
+
   elements.platformTitle.textContent = assets.length
     ? 'Available downloads'
     : 'No installer in this release';
-  elements.downloadList.replaceChildren();
 
   if (!assets.length) {
     const message = document.createElement('p');
@@ -362,7 +373,13 @@ function showReleaseError(error) {
   const message = document.createElement('p');
   message.className = 'empty-state';
   message.textContent = 'Please use the official GitHub Releases page to see available downloads.';
-  elements.downloadList.append(message);
+  const fallbackLink = document.createElement('a');
+  fallbackLink.className = 'text-link';
+  fallbackLink.href = allReleasesUrl;
+  fallbackLink.target = '_blank';
+  fallbackLink.rel = 'noopener noreferrer';
+  fallbackLink.textContent = 'Open GitHub Releases to download an installer';
+  elements.downloadList.append(message, fallbackLink);
 }
 
 async function initialize() {
