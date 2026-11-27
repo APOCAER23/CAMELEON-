@@ -27,6 +27,7 @@ const RENDERER_INDEX = path.join(RENDERER_DIR, 'index.html');
 
 process.umask?.(0o077);
 if (!app.requestSingleInstanceLock()) app.quit();
+if (process.platform === 'win32') app.setAppUserModelId('com.apocaer23.cameleon');
 
 let win: BrowserWindow | null = null;
 
@@ -39,7 +40,7 @@ const guarded = <A extends unknown[], R>(fn: (...a: A) => R | Promise<R>, fallba
   (e: IpcMainInvokeEvent, ...a: A) => (trusted(e) ? fn(...a) : fallback);
 
 function createWindow() {
-  const iconPath = path.join(here, '..', 'assets', 'icon.png');
+  const iconPath = path.join(here, '..', 'assets', process.platform === 'win32' ? 'icon.ico' : 'icon.png');
   win = new BrowserWindow({
     width: 1240, height: 800, minWidth: 960, minHeight: 600, show: false,
     title: 'CAMELEON',
