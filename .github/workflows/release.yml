@@ -35,8 +35,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       contents: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/download-artifact@v4
         with:
           path: release-assets
@@ -46,3 +50,23 @@ jobs:
           files: release-assets/*
           fail_on_unmatched_files: true
           generate_release_notes: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Update download site release manifest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" > latest-release.json
+          gh api "repos/$GITHUB_REPOSITORY/releases?per_page=6" > release-history.json
+          node scripts/update-site-releases.mjs latest-release.json release-history.json site/releases.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/releases.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update download site manifest for $RELEASE_TAG"
+            git push origin HEAD:main
+            gh workflow run pages.yml --ref main
+          fi

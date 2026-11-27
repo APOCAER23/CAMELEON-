@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "release": {
+    "tag_name": "v0.2.2",
+    "published_at": "2026-11-26T23:41:54Z",
+    "html_url": "https://github.com/APOCAER23/CAMELEON-/releases/tag/v0.2.2",
+    "assets": [
+      {
+        "name": "CAMELEON.Setup.0.2.2.exe",
+        "size": 127024519,
+        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.2/CAMELEON.Setup.0.2.2.exe"
+      },
+      {
+        "name": "CAMELEON-0.2.2-arm64.dmg",
+        "size": 152082421,
+        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.2/CAMELEON-0.2.2-arm64.dmg"
+      },
+      {
+        "name": "CAMELEON-0.2.2.AppImage",
+        "size": 171655328,
+        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.2/CAMELEON-0.2.2.AppImage"
+      }
+    ]
+  },
+  "previous_releases": []
+}

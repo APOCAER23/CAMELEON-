@@ -866,6 +866,16 @@ h2 {
   }
 }
 
+@media (max-width: 360px) {
+  .main-nav {
+    gap: 5px;
+  }
+
+  .nav-download {
+    padding-inline: 8px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

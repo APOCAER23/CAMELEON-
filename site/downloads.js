@@ -1,6 +1,5 @@
 const repository = 'APOCAER23/CAMELEON-';
-const latestReleaseUrl = `https://api.github.com/repos/${repository}/releases/latest`;
-const releasesUrl = `https://api.github.com/repos/${repository}/releases?per_page=6`;
+const releaseManifestUrl = './releases.json';
 const allReleasesUrl = `https://github.com/${repository}/releases`;
 const platformNames = {
   windows: 'Windows',
@@ -212,28 +211,30 @@ function renderReleaseInfo(release) {
   }
 }
 
-async function loadLatestRelease() {
-  const response = await fetch(latestReleaseUrl, {
-    headers: { Accept: 'application/vnd.github+json' },
-    cache: 'no-store',
-  });
-
-  if (response.status === 404) {
-    throw new Error('No public CAMELEON release has been published yet.');
-  }
+async function loadReleaseManifest() {
+  const response = await fetch(releaseManifestUrl, { cache: 'no-store' });
   if (!response.ok) {
-    throw new Error(`GitHub Releases returned HTTP ${response.status}.`);
+    throw new Error(`Release manifest returned HTTP ${response.status}.`);
   }
 
-  const release = await response.json();
-  if (typeof release.tag_name !== 'string' || !Array.isArray(release.assets)) {
-    throw new Error('GitHub Releases returned an unexpected response.');
+  const manifest = await response.json();
+  const release = manifest.release;
+  if (
+    manifest.schema_version !== 1
+    || typeof release?.tag_name !== 'string'
+    || !Array.isArray(release.assets)
+    || !Array.isArray(manifest.previous_releases)
+  ) {
+    throw new Error('The release manifest has an unexpected format.');
   }
+
+  const releaseUrl = safeDownloadUrl(release.html_url);
+  if (!releaseUrl) throw new Error('The release notes URL is invalid.');
 
   currentRelease = release;
   downloadableAssets = { windows: [], macos: [], linux: [] };
   for (const asset of release.assets) {
-    if (asset.state !== 'uploaded' || typeof asset.name !== 'string') continue;
+    if (typeof asset.name !== 'string') continue;
     const platform = classifyAsset(asset.name);
     const url = safeDownloadUrl(asset.browser_download_url);
     if (!platform || !url) continue;
@@ -241,28 +242,14 @@ async function loadLatestRelease() {
   }
 
   renderPlatformAvailability();
-  renderReleaseInfo(release);
+  renderReleaseInfo({ ...release, html_url: releaseUrl });
   selectPlatform(selectedPlatform);
+  renderPreviousReleases(manifest.previous_releases);
 }
 
-async function loadPreviousReleases() {
-  const response = await fetch(releasesUrl, {
-    headers: { Accept: 'application/vnd.github+json' },
-    cache: 'no-store',
-  });
-  if (!response.ok) {
-    throw new Error(`Release history returned HTTP ${response.status}.`);
-  }
-
-  const releases = await response.json();
-  const currentTag = currentRelease?.tag_name
-    || releases.find((release) => !release.draft && !release.prerelease)?.tag_name;
-  const previous = releases
-    .filter((release) => !release.draft && !release.prerelease && release.tag_name !== currentTag)
-    .slice(0, 4);
-
+function renderPreviousReleases(releases) {
   elements.previousList.replaceChildren();
-  if (!previous.length) {
+  if (!releases.length) {
     const item = document.createElement('li');
     item.className = 'empty-state';
     item.textContent = 'No previous public versions yet.';
@@ -270,9 +257,9 @@ async function loadPreviousReleases() {
     return;
   }
 
-  for (const release of previous) {
+  for (const release of releases) {
     const url = safeDownloadUrl(release.html_url);
-    if (!url) continue;
+    if (!url || typeof release.tag_name !== 'string') continue;
     const item = document.createElement('li');
     item.className = 'previous-release';
     const link = document.createElement('a');
@@ -364,6 +351,7 @@ function showReleaseError(error) {
   elements.releaseVersion.textContent = 'Unavailable';
   elements.releaseDate.textContent = 'Unavailable';
   elements.releaseSize.textContent = 'Unavailable';
+  elements.releaseNotes.href = allReleasesUrl;
   elements.downloadStatus.textContent = 'Could not load the latest release.';
   for (const platform of Object.keys(platformNames)) {
     document.querySelector(`#${platform}-availability`).textContent = 'Unavailable';
@@ -383,15 +371,9 @@ async function initialize() {
   setupPlatformSelector();
 
   try {
-    await loadLatestRelease();
+    await loadReleaseManifest();
   } catch (error) {
     showReleaseError(error);
-  }
-
-  try {
-    await loadPreviousReleases();
-  } catch (error) {
-    console.error('Unable to load CAMELEON release history:', error);
     elements.previousList.replaceChildren();
     const item = document.createElement('li');
     item.className = 'empty-state';

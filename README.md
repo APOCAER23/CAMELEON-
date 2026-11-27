@@ -48,6 +48,7 @@ npm run package:desktop
 
 The app installer includes its own Node.js runtime; a separate Node.js installation is not required to run it.
 New public releases are built by GitHub Actions when a version tag (for example `v0.2.2`) is pushed.
+The release workflow updates `site/releases.json` and deploys the download page, so the browser does not need to call the GitHub Releases API.
 Installers are currently unsigned, so Windows or macOS may display a security warning during installation.
 To enable the download page, set the repository's GitHub Pages source to **GitHub Actions** once under **Settings → Pages**.
 
