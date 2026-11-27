@@ -1,28 +1,33 @@
 {
   "schema_version": 1,
   "release": {
-    "tag_name": "v0.2.3",
-    "published_at": "2026-11-27T08:04:18Z",
-    "html_url": "https://github.com/APOCAER23/CAMELEON-/releases/tag/v0.2.3",
+    "tag_name": "v0.2.4",
+    "published_at": "2026-11-27T13:45:02Z",
+    "html_url": "https://github.com/APOCAER23/CAMELEON-/releases/tag/v0.2.4",
     "assets": [
       {
-        "name": "CAMELEON-0.2.3-arm64.dmg",
-        "size": 152110844,
-        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.3/CAMELEON-0.2.3-arm64.dmg"
+        "name": "CAMELEON-0.2.4-arm64.dmg",
+        "size": 152110519,
+        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.4/CAMELEON-0.2.4-arm64.dmg"
       },
       {
-        "name": "CAMELEON-0.2.3.AppImage",
-        "size": 171692295,
-        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.3/CAMELEON-0.2.3.AppImage"
+        "name": "CAMELEON-0.2.4.AppImage",
+        "size": 171692223,
+        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.4/CAMELEON-0.2.4.AppImage"
       },
       {
-        "name": "CAMELEON.Setup.0.2.3.exe",
-        "size": 127130107,
-        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.3/CAMELEON.Setup.0.2.3.exe"
+        "name": "CAMELEON.Setup.0.2.4.exe",
+        "size": 127130396,
+        "browser_download_url": "https://github.com/APOCAER23/CAMELEON-/releases/download/v0.2.4/CAMELEON.Setup.0.2.4.exe"
       }
     ]
   },
   "previous_releases": [
+    {
+      "tag_name": "v0.2.3",
+      "published_at": "2026-11-27T08:04:18Z",
+      "html_url": "https://github.com/APOCAER23/CAMELEON-/releases/tag/v0.2.3"
+    },
     {
       "tag_name": "v0.2.2",
       "published_at": "2026-11-26T23:41:54Z",
