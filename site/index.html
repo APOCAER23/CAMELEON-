@@ -1,129 +1,219 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#08130f">
-    <meta name="description" content="Téléchargez CAMELEON, le centre de contrôle pour vos fournisseurs IA et agents de développement.">
-    <title>Télécharger CAMELEON</title>
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#101311">
+    <meta name="description" content="Download CAMELEON for Windows, macOS and Linux. One desktop app for your AI providers, models and tools.">
+    <title>Download CAMELEON for Desktop</title>
+    <link rel="icon" href="./logo.png" type="image/png">
     <link rel="stylesheet" href="./styles.css">
+    <script>
+      try {
+        const theme = localStorage.getItem('cameleon-theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      } catch {
+        // Keep the default dark theme when browser storage is unavailable.
+      }
+    </script>
     <script src="./downloads.js" defer></script>
   </head>
   <body>
-    <div class="page">
+    <div class="page-shell">
       <header class="topbar">
-        <a class="brand" href="./" aria-label="CAMELEON, accueil">
-          <span class="brand-mark" aria-hidden="true">C</span>
+        <a class="brand" href="#home" aria-label="CAMELEON home">
+          <img src="./logo.png" alt="" width="34" height="34">
           <span>CAMELEON</span>
         </a>
-        <a class="top-link" href="https://github.com/APOCAER23/CAMELEON-" target="_blank" rel="noreferrer">
-          Code source <span aria-hidden="true">↗</span>
-        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16"></path>
+            </svg>
+          </button>
+          <div class="nav-links" id="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="https://github.com/APOCAER23/CAMELEON-/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentation</a>
+          </div>
+          <a class="nav-download" href="#downloads">Download</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
+            </svg>
+          </button>
+        </nav>
       </header>
 
       <main>
-        <section class="hero">
-          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Téléchargement officiel</p>
-          <h1>Un seul CLI.<br><span>Tous vos fournisseurs.</span></h1>
-          <p class="hero-copy">
-            Configurez vos fournisseurs d’IA, choisissez vos modèles et lancez vos agents depuis une seule application.
+        <section class="hero" id="home" aria-labelledby="page-title">
+          <img class="hero-logo" src="./logo.png" alt="" width="64" height="64">
+          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> The official CAMELEON download</p>
+          <h1 id="page-title">Cameleon for Desktop</h1>
+          <p class="hero-tagline">Your AI workspace. Everywhere.</p>
+          <p class="hero-description">
+            Access multiple AI providers, models and tools through one powerful desktop application.
+            Available on Windows, macOS and Linux.
           </p>
-          <a class="hero-cta" href="#downloads">Télécharger CAMELEON <span aria-hidden="true">↓</span></a>
-          <p class="release-line">Version disponible : <strong id="release-version">recherche…</strong></p>
-          <div class="hero-orbit orbit-one" aria-hidden="true"></div>
-          <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+          <p class="hero-version" id="hero-version">Checking the latest release…</p>
         </section>
 
-        <section class="downloads-section" id="downloads" aria-labelledby="downloads-title">
-          <div class="section-heading">
+        <section class="download-section" id="downloads" aria-labelledby="download-title">
+          <div class="section-title">
             <div>
-              <p class="eyebrow">Prêt en quelques secondes</p>
-              <h2 id="downloads-title">Télécharger l’application</h2>
+              <p class="eyebrow">Choose your platform</p>
+              <h2 id="download-title">Download CAMELEON</h2>
             </div>
-            <p class="release-status" id="release-status" role="status" aria-live="polite">
-              Recherche de la dernière version…
-            </p>
-          </div>
-
-          <div class="download-grid">
-            <article class="download-card">
-              <div class="platform-icon windows-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-              <div class="platform-copy">
-                <h3>Windows</h3>
-                <p>Windows 10 ou version ultérieure · 64 bits</p>
-              </div>
-              <div class="platform-actions" id="windows-actions">
-                <p class="unavailable" id="windows-state">Recherche de l’installateur…</p>
-              </div>
-              <span class="file-note">Installateur .exe</span>
-            </article>
-
-            <article class="download-card">
-              <div class="platform-icon apple-icon" aria-hidden="true">●</div>
-              <div class="platform-copy">
-                <h3>macOS</h3>
-                <p>Fichier pour l’architecture publiée</p>
-              </div>
-              <div class="platform-actions" id="mac-actions">
-                <p class="unavailable" id="mac-state">Recherche de l’installateur…</p>
-              </div>
-              <span class="file-note">Image disque .dmg</span>
-            </article>
-
-            <article class="download-card">
-              <div class="platform-icon linux-icon" aria-hidden="true">⌘</div>
-              <div class="platform-copy">
-                <h3>Linux</h3>
-                <p>Choisissez le format adapté à votre système</p>
-              </div>
-              <div class="platform-actions linux-actions" id="linux-actions">
-                <p class="unavailable" id="linux-state">Recherche des téléchargements…</p>
-              </div>
-              <span class="file-note">AppImage · compatible avec la plupart des distributions</span>
-            </article>
-          </div>
-
-          <div class="release-footer">
-            <span>Les liens pointent vers les fichiers de la dernière version publiée.</span>
-            <a href="https://github.com/APOCAER23/CAMELEON-/releases" target="_blank" rel="noreferrer">
-              Toutes les versions <span aria-hidden="true">↗</span>
+            <a class="text-link release-notes-link" id="release-notes-link" href="https://github.com/APOCAER23/CAMELEON-/releases" target="_blank" rel="noopener noreferrer">
+              Release notes <span aria-hidden="true">↗</span>
             </a>
           </div>
+
+          <div class="os-selector" role="tablist" aria-label="Select your operating system">
+            <button class="os-option" id="os-windows" type="button" role="tab" aria-selected="false" aria-controls="download-panel" data-os="windows">
+              <svg class="os-icon windows-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 5.2 10.3 4v7.5H2V5.2Zm9.7-1.4L22 2.4v9.1H11.7V3.8ZM2 12.8h8.3v7.5L2 19.1v-6.3Zm9.7 0H22v8.8l-10.3-1.4v-7.4Z"></path>
+              </svg>
+              <span class="os-label">Windows</span>
+              <span class="os-detail" id="windows-availability">Checking files…</span>
+            </button>
+            <button class="os-option" id="os-macos" type="button" role="tab" aria-selected="false" aria-controls="download-panel" data-os="macos">
+              <svg class="os-icon device-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="3" width="16" height="14" rx="1.7"></rect>
+                <path d="M2.5 21h19l-1.7-4H4.2L2.5 21Z"></path>
+              </svg>
+              <span class="os-label">macOS</span>
+              <span class="os-detail" id="macos-availability">Checking files…</span>
+            </button>
+            <button class="os-option" id="os-linux" type="button" role="tab" aria-selected="false" aria-controls="download-panel" data-os="linux">
+              <svg class="os-icon terminal-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2.5" y="3.5" width="19" height="17" rx="2"></rect>
+                <path d="m6.5 9 3 3-3 3m5.5 0h5"></path>
+              </svg>
+              <span class="os-label">Linux</span>
+              <span class="os-detail" id="linux-availability">Checking files…</span>
+            </button>
+          </div>
+
+          <div class="download-panel" id="download-panel" role="tabpanel" aria-labelledby="os-windows" tabindex="0">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker" id="selected-platform">Windows</p>
+                <h3 id="platform-title">Available downloads</h3>
+              </div>
+              <p class="download-status" id="download-status" role="status" aria-live="polite">Loading release files…</p>
+            </div>
+            <div class="download-list" id="download-list">
+              <p class="empty-state">Checking the latest GitHub release…</p>
+            </div>
+            <p class="source-note">Downloads are served directly from the official CAMELEON GitHub Releases.</p>
+          </div>
         </section>
 
-        <section class="details-grid" aria-label="Informations sur l’application">
-          <article class="detail">
-            <span class="detail-number">01</span>
-            <h3>Installation simple</h3>
-            <p>Téléchargez le fichier pour votre système et suivez les étapes affichées.</p>
-          </article>
-          <article class="detail">
-            <span class="detail-number">02</span>
-            <h3>Node.js inclus</h3>
-            <p>L’application embarque son runtime. Vous n’avez rien d’autre à installer.</p>
-          </article>
-          <article class="detail">
-            <span class="detail-number">03</span>
-            <h3>Besoin d’aide ?</h3>
-            <p>Consultez le guide ou signalez un problème sur le dépôt du projet.</p>
-            <a class="text-link" href="https://github.com/APOCAER23/CAMELEON-/issues" target="_blank" rel="noreferrer">Aide et support ↗</a>
-          </article>
-        </section>
-
-        <aside class="security-note">
-          <span class="security-icon" aria-hidden="true">i</span>
-          <p>
-            Les installateurs ne sont pas encore signés. Windows ou macOS peut afficher un avertissement de sécurité.
-            Téléchargez toujours CAMELEON depuis ce site ou le dépôt officiel.
+        <section class="release-info" aria-labelledby="release-info-title">
+          <div class="section-title compact-title">
+            <div>
+              <p class="eyebrow">Release details</p>
+              <h2 id="release-info-title">Everything you need to know</h2>
+            </div>
+          </div>
+          <dl class="release-facts">
+            <div>
+              <dt>Latest version</dt>
+              <dd id="release-version">Loading…</dd>
+            </div>
+            <div>
+              <dt>Published</dt>
+              <dd id="release-date">Loading…</dd>
+            </div>
+            <div>
+              <dt>Available installers</dt>
+              <dd id="release-size">Loading…</dd>
+            </div>
+            <div>
+              <dt>Runtime</dt>
+              <dd>Included with the app</dd>
+            </div>
+          </dl>
+          <p class="requirements-copy" id="requirements-copy">
+            Compatibility is shown for each file above. Minimum operating system versions are not yet published.
           </p>
-        </aside>
+        </section>
+
+        <section class="previous-releases" aria-labelledby="previous-title">
+          <div class="section-title compact-title">
+            <div>
+              <p class="eyebrow">Need an earlier build?</p>
+              <h2 id="previous-title">Previous versions</h2>
+            </div>
+            <a class="text-link" href="https://github.com/APOCAER23/CAMELEON-/releases" target="_blank" rel="noopener noreferrer">
+              All releases <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <ul class="previous-list" id="previous-list" aria-live="polite">
+            <li class="empty-state">Loading release history…</li>
+          </ul>
+        </section>
+
+        <section class="faq-section" id="faq" aria-labelledby="faq-title">
+          <div class="section-title compact-title">
+            <div>
+              <p class="eyebrow">Quick answers</p>
+              <h2 id="faq-title">Frequently asked questions</h2>
+            </div>
+          </div>
+          <details>
+            <summary>Which download should I choose?</summary>
+            <p>Select your operating system above. Each file lists its architecture, format and size; only files in the latest release are shown.</p>
+          </details>
+          <details>
+            <summary>Do I need to install Node.js?</summary>
+            <p>No. The desktop installer includes the runtime required to run CAMELEON.</p>
+          </details>
+          <details>
+            <summary>Why does my computer show a security warning?</summary>
+            <p>The current Windows and macOS installers are not code-signed. Download them only from the official CAMELEON release links on this page.</p>
+          </details>
+          <details>
+            <summary>Can I install the current macOS build on an Intel Mac?</summary>
+            <p id="macos-compatibility">Checking which macOS architectures are available in the latest release…</p>
+          </details>
+        </section>
+
+        <section class="help-section" id="features" aria-label="About and help">
+          <div>
+            <p class="eyebrow">One workspace for your AI tools</p>
+            <h2>Bring your providers, models and agents together.</h2>
+            <p>CAMELEON keeps your AI setup in one desktop app, with your credentials stored locally.</p>
+          </div>
+          <div class="help-links">
+            <h3>Need help installing CAMELEON?</h3>
+            <a href="https://github.com/APOCAER23/CAMELEON-/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentation <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/APOCAER23/CAMELEON-/blob/main/README.md#download-the-desktop-app" target="_blank" rel="noopener noreferrer">Installation guide <span aria-hidden="true">↗</span></a>
+            <a href="#faq">Frequently asked questions <span aria-hidden="true">↓</span></a>
+            <a href="https://github.com/APOCAER23/CAMELEON-/issues" target="_blank" rel="noopener noreferrer">Support <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <p class="security-note">
+          <span aria-hidden="true">!</span>
+          Installers are currently unsigned. Windows or macOS may show a security warning during installation.
+        </p>
       </main>
 
       <footer class="footer">
-        <span>© CAMELEON</span>
-        <span>Conçu pour simplifier votre flux de travail IA.</span>
-        <a href="https://github.com/APOCAER23/CAMELEON-" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a class="footer-brand" href="#home"><img src="./logo.png" alt="" width="24" height="24"> CAMELEON</a>
+        <span>© CAMELEON · Built for your AI workflow.</span>
+        <a href="https://github.com/APOCAER23/CAMELEON-" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       </footer>
     </div>
   </body>
