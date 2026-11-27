@@ -1,6 +1,6 @@
 {
   "name": "@cameleon/desktop",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "description": "CAMELEON Desktop — graphical control center for providers, models and agents.",
   "type": "module",

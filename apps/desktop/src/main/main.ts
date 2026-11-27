@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { app, BrowserWindow, dialog, ipcMain, nativeTheme, session, type IpcMainInvokeEvent } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, Menu, nativeTheme, session, type IpcMainInvokeEvent } from 'electron';
 import { z } from 'zod';
 import { getPaths, stopDaemon, tailLog } from '@cameleon/cli';
 import { findExecutable, redactString } from '@cameleon/kit';
@@ -116,6 +116,7 @@ function startSessionFor(raw: unknown): { ok: boolean; sessionId?: string; title
 }
 
 app.whenReady().then(() => {
+  if (process.platform !== 'darwin') Menu.setApplicationMenu(null);
   // Everything is denied except writing to the clipboard (copy buttons).
   session.defaultSession.setPermissionRequestHandler((_wc, perm, cb) => cb(perm === 'clipboard-sanitized-write'));
   session.defaultSession.setPermissionCheckHandler((_wc, perm) => perm === 'clipboard-sanitized-write');
