@@ -1,7 +1,7 @@
 {
   "name": "cameleon",
   "private": true,
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "CAMELEON \u2014 One CLI. Every Provider. Every Agent.",
   "type": "module",
   "engines": {
